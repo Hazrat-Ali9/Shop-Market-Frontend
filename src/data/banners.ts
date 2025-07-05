@@ -1,5 +1,5 @@
 import { Banner } from '../types';
-
+// banner ts
 export const banners: Banner[] = [
   {
     id: 'banner-1',
