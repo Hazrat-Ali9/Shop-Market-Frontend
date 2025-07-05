@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Package, Truck, CheckCircle, Clock, XCircle } from 'lucide-react';
 import { useStore } from '../store/useStore';
 import { Link } from 'react-router-dom';
-
+// orders tsx
 export const Orders: React.FC = () => {
   const { orders, isAuthenticated } = useStore();
 
