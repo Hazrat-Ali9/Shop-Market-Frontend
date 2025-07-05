@@ -17,7 +17,7 @@ import { useStore } from '../store/useStore';
 import { allProducts } from '../data/products';
 import { ProductCard } from '../components/common/ProductCard';
 import toast from 'react-hot-toast';
-
+// products detail
 export const ProductDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [selectedColor, setSelectedColor] = useState('');
