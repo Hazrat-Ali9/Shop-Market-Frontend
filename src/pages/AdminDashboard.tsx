@@ -20,7 +20,7 @@ import { useStore } from '../store/useStore';
 import { Product, User as UserType } from '../types';
 import { ProductForm } from '../components/admin/ProductForm';
 import { UserManagement } from '../components/admin/UserManagement';
-
+// admin dashboard
 export const AdminDashboard: React.FC = () => {
   const { 
     user, 
