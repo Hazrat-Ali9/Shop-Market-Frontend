@@ -6,7 +6,7 @@ import { BannerCarousel } from '../components/common/BannerCarousel';
 import { ProductCard } from '../components/common/ProductCard';
 import { useStore } from '../store/useStore';
 import { allProducts } from '../data/products';
-
+// Home tsx
 export const Home: React.FC = () => {
   const { setProducts } = useStore();
 
