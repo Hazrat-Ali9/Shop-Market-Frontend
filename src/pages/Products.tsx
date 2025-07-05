@@ -5,7 +5,7 @@ import { ProductCard } from '../components/common/ProductCard';
 import { useStore } from '../store/useStore';
 import { allProducts } from '../data/products';
 import { useLocation } from 'react-router-dom';
-
+// Products
 export const Products: React.FC = () => {
   const location = useLocation();
   const { 
