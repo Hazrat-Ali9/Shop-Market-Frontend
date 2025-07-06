@@ -1,5 +1,5 @@
 import { Product } from '../types';
-// Products
+
 export const products: Product[] = [
   // Men's Products
   {

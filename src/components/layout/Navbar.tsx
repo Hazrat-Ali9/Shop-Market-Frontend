@@ -78,10 +78,12 @@ export const Navbar: React.FC = () => {
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setGlobalSearchQuery(searchQuery);
-    setShowSuggestions(false);
-    if (location.pathname !== '/products') {
-      navigate('/products');
+    if (searchQuery.trim()) {
+      setGlobalSearchQuery(searchQuery);
+      setShowSuggestions(false);
+      if (location.pathname !== '/products') {
+        navigate('/products');
+      }
     }
   };
 
@@ -123,9 +125,9 @@ export const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-2 flex-shrink-0">
             <ShoppingBag className="h-8 w-8 text-burgundy" style={{ color: '#800020' }} />
-            <span className="text-xl font-bold text-burgundy" style={{ color: '#800020' }}>
+            <span className="text-xl font-bold text-burgundy hidden sm:block" style={{ color: '#800020' }}>
               Shop Market
             </span>
           </Link>
@@ -156,8 +158,8 @@ export const Navbar: React.FC = () => {
           </div>
 
           {/* Search Bar */}
-          <div className="hidden md:flex items-center space-x-4">
-            <div ref={searchRef} className="relative">
+          <div className="hidden md:flex items-center space-x-4 flex-1 max-w-md mx-8">
+            <div ref={searchRef} className="relative w-full">
               <form onSubmit={handleSearchSubmit} className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                 <input
@@ -166,7 +168,7 @@ export const Navbar: React.FC = () => {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onFocus={() => searchQuery.length > 0 && setShowSuggestions(true)}
-                  className="pl-10 pr-4 py-2 w-64 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-burgundy text-sm"
+                  className="w-full pl-10 pr-4 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-burgundy text-sm"
                   style={{ '--tw-ring-color': '#800020' } as React.CSSProperties}
                 />
               </form>
@@ -194,11 +196,15 @@ export const Navbar: React.FC = () => {
                 )}
               </AnimatePresence>
             </div>
+          </div>
 
+          {/* Right Side Actions */}
+          <div className="flex items-center space-x-2">
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
               className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              aria-label="Toggle theme"
             >
               {isDarkMode ? (
                 <Sun className="h-5 w-5 text-gray-600 dark:text-gray-300" />
@@ -211,6 +217,7 @@ export const Navbar: React.FC = () => {
             <button
               onClick={() => setWishlistOpen(true)}
               className="relative p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              aria-label="Open wishlist"
             >
               <Heart className="h-5 w-5 text-gray-600 dark:text-gray-300" />
               {wishlist.length > 0 && (
@@ -225,6 +232,7 @@ export const Navbar: React.FC = () => {
             <button
               onClick={() => setCartOpen(true)}
               className="relative p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              aria-label="Open cart"
             >
               <ShoppingCart className="h-5 w-5 text-gray-600 dark:text-gray-300" />
               {cart.length > 0 && (
@@ -237,10 +245,11 @@ export const Navbar: React.FC = () => {
 
             {/* User Menu */}
             {isAuthenticated ? (
-              <div ref={userMenuRef} className="relative">
+              <div ref={userMenuRef} className="relative hidden md:block">
                 <button
                   onClick={() => setShowUserMenu(!showUserMenu)}
                   className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                  aria-label="User menu"
                 >
                   <User className="h-5 w-5 text-gray-600 dark:text-gray-300" />
                   <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -289,25 +298,26 @@ export const Navbar: React.FC = () => {
             ) : (
               <Link
                 to="/login"
-                className="px-4 py-2 bg-burgundy text-white rounded-lg hover:opacity-90 transition-colors text-sm font-medium"
+                className="hidden md:block px-4 py-2 bg-burgundy text-white rounded-lg hover:opacity-90 transition-colors text-sm font-medium"
                 style={{ backgroundColor: '#800020' }}
               >
                 Login
               </Link>
             )}
-          </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-          >
-            {isMobileMenuOpen ? (
-              <X className="h-6 w-6 text-gray-600 dark:text-gray-300" />
-            ) : (
-              <Menu className="h-6 w-6 text-gray-600 dark:text-gray-300" />
-            )}
-          </button>
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              aria-label="Toggle mobile menu"
+            >
+              {isMobileMenuOpen ? (
+                <X className="h-6 w-6 text-gray-600 dark:text-gray-300" />
+              ) : (
+                <Menu className="h-6 w-6 text-gray-600 dark:text-gray-300" />
+              )}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -355,6 +365,7 @@ export const Navbar: React.FC = () => {
                 <button
                   onClick={toggleTheme}
                   className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                  aria-label="Toggle theme"
                 >
                   {isDarkMode ? (
                     <Sun className="h-5 w-5 text-gray-600 dark:text-gray-300" />
@@ -369,6 +380,7 @@ export const Navbar: React.FC = () => {
                     setMobileMenuOpen(false);
                   }}
                   className="relative p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                  aria-label="Open wishlist"
                 >
                   <Heart className="h-5 w-5 text-gray-600 dark:text-gray-300" />
                   {wishlist.length > 0 && (
@@ -385,6 +397,7 @@ export const Navbar: React.FC = () => {
                     setMobileMenuOpen(false);
                   }}
                   className="relative p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                  aria-label="Open cart"
                 >
                   <ShoppingCart className="h-5 w-5 text-gray-600 dark:text-gray-300" />
                   {cart.length > 0 && (

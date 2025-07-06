@@ -5,7 +5,7 @@ import { Eye, EyeOff, User, Mail, Lock } from 'lucide-react';
 import { useStore } from '../store/useStore';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-// auth
+
 interface LoginForm {
   email: string;
   password: string;

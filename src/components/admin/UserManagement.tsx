@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Search, Filter, MoreVertical, UserCheck, UserX, Shield, User } from 'lucide-react';
 import { useStore } from '../../store/useStore';
-// user management
+
 export const UserManagement: React.FC = () => {
   const { users, updateUserStatus, updateUserRole } = useStore();
   const [searchQuery, setSearchQuery] = useState('');

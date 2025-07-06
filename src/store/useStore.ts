@@ -276,12 +276,18 @@ export const useStore = create<AppState>()(
       setSearchQuery: (query) => set({ searchQuery: query }),
       searchSuggestions: [],
       getSearchSuggestions: (query) => {
+        if (!query || query.length < 2) {
+          set({ searchSuggestions: [] });
+          return;
+        }
+
         const products = get().products;
         const suggestions: SearchSuggestion[] = [];
+        const lowerQuery = query.toLowerCase();
         
         // Product name suggestions
         const productMatches = products
-          .filter(p => p.name.toLowerCase().includes(query.toLowerCase()))
+          .filter(p => p.name.toLowerCase().includes(lowerQuery))
           .slice(0, 3)
           .map(p => ({
             id: `product-${p.id}`,
@@ -291,7 +297,7 @@ export const useStore = create<AppState>()(
         
         // Category suggestions
         const categories = [...new Set(products.map(p => p.category))]
-          .filter(c => c.toLowerCase().includes(query.toLowerCase()))
+          .filter(c => c.toLowerCase().includes(lowerQuery))
           .slice(0, 2)
           .map(c => ({
             id: `category-${c}`,
@@ -302,7 +308,7 @@ export const useStore = create<AppState>()(
         
         // Brand suggestions
         const brands = [...new Set(products.map(p => p.brand))]
-          .filter(b => b.toLowerCase().includes(query.toLowerCase()))
+          .filter(b => b.toLowerCase().includes(lowerQuery))
           .slice(0, 2)
           .map(b => ({
             id: `brand-${b}`,

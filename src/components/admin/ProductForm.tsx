@@ -4,7 +4,7 @@ import { X, Upload, Plus, Minus } from 'lucide-react';
 import { useStore } from '../../store/useStore';
 import { Product } from '../../types';
 import toast from 'react-hot-toast';
-// Product from
+
 interface ProductFormProps {
   product?: Product | null;
   onClose: () => void;

@@ -4,7 +4,7 @@ import { CreditCard, Truck, MapPin, Lock } from 'lucide-react';
 import { useStore } from '../store/useStore';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-// checkout
+
 export const Checkout: React.FC = () => {
   const navigate = useNavigate();
   const { 

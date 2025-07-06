@@ -48,6 +48,11 @@ input[type="radio"]:focus {
   ring-color: var(--burgundy);
 }
 
+/* Prevent layout shift */
+.navbar-height {
+  height: 64px; /* 16 * 4 = 64px (h-16) */
+}
+
 /* Animation classes */
 .animate-fade-in {
   animation: fadeIn 0.3s ease-in-out;
@@ -146,7 +151,7 @@ input[type="radio"]:focus {
 /* Form styles */
 .form-input {
   @apply w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 dark:bg-gray-700 dark:text-white transition-colors;
-  focus:ring-color: var(--burgundy);
+  --tw-ring-color: var(--burgundy);
 }
 
 .form-label {
@@ -200,6 +205,22 @@ input[type="radio"]:focus {
   border-color: var(--burgundy);
 }
 
+/* Prevent horizontal scroll */
+html, body {
+  overflow-x: hidden;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Image optimization */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 /* Print styles */
 @media print {
   .no-print {
@@ -221,4 +242,52 @@ input[type="radio"]:focus {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Fix for mobile viewport issues */
+@supports (-webkit-touch-callout: none) {
+  .min-h-screen {
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Ensure proper z-index stacking */
+.navbar {
+  z-index: 1000;
+}
+
+.modal {
+  z-index: 1050;
+}
+
+.dropdown {
+  z-index: 1020;
+}
+
+/* Loading states */
+.loading {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* Error states */
+.error {
+  border-color: #ef4444;
+}
+
+.error:focus {
+  ring-color: #ef4444;
+}
+
+/* Success states */
+.success {
+  border-color: #10b981;
+}
+
+.success:focus {
+  ring-color: #10b981;
 }
