@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { Product, User, CartItem, WishlistItem, Order, FilterOptions, PaymentMethod, SearchSuggestion, DashboardStats } from '../types';
-
+// use store
 interface AppState {
   // Theme
   isDarkMode: boolean;
